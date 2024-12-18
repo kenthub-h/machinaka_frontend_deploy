@@ -38,3 +38,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+#画像
+/public/officemain.jpg
+/public/office1.webp
+/public/office2.webp
+/public/office3.webp
