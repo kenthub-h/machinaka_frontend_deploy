@@ -27,7 +27,7 @@ export default function LoginPage() {
         const errorData = await response.json();
         setErrorMessage(errorData.detail || 'ログインに失敗しました');
       }
-    } catch (error) {
+    } catch {
       setErrorMessage('サーバーに接続できませんでした');
     }
   };
