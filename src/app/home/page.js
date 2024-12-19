@@ -1,10 +1,10 @@
 'use client';
 
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-const MapSection = dynamic(() => import('./MapComponent'), { ssr: false }); // クライアントサイドでのみレンダリング
+const MapSection = dynamic(() => import('./MapComponent'), { ssr: false });
 
 function PropertyCards() {
   const properties = [
@@ -82,9 +82,7 @@ export default function Header() {
   const [activeTab, setActiveTab] = useState('list');
 
   const handleLoginClick = () => {
-    if (typeof window !== "undefined") {
-      router.push('/login');
-    }
+    router.push('/login');
   };
 
   return (
