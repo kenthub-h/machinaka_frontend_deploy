@@ -14,26 +14,34 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_API_URL}/login`, {
+      const response = await fetch('http://localhost:8000/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
 
       if (response.ok) {
+        const data = await response.json();
+        // トークンを保存 (localStorageに保存)
+        localStorage.setItem('access_token', data.access_token);
         alert('ログイン成功');
-        router.push('/main');
+        router.push('/main'); // ログイン後、プロフィール画面に遷移
+      // トークン前のコード
+      // if (response.ok) {
+      //   alert('ログイン成功');
+      //   router.push('/main');
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData.detail || 'ログインに失敗しました');
       }
-    } catch {
+    } catch (error) {
       setErrorMessage('サーバーに接続できませんでした');
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      {/* ログインフォーム */}
       <form
         onSubmit={handleLogin}
         className="w-[400px] bg-white p-8 rounded-lg shadow-lg"
@@ -41,6 +49,7 @@ export default function LoginPage() {
         <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
           ログイン
         </h1>
+        {/* エラーメッセージ */}
         {errorMessage && (
           <p className="text-red-500 text-sm mb-4 text-center">
             {errorMessage}
@@ -54,7 +63,7 @@ export default function LoginPage() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
             placeholder="example@domain.com"
           />
         </div>
@@ -66,13 +75,13 @@ export default function LoginPage() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
             placeholder="••••••••"
           />
         </div>
         <button
           type="submit"
-          className="w-full py-3 bg-orange-500 text-white text-lg font-semibold rounded-lg shadow hover:bg-orange-600 transition"
+          className="w-full py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-lg font-semibold rounded-lg shadow hover:bg-blue-700 transition"
         >
           ログイン
         </button>
