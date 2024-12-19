@@ -20,7 +20,7 @@ export default function Main() {
     setErrorMessage("");
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/api/match`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/match`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },

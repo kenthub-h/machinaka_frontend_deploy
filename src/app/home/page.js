@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-const MapSection = dynamic(() => import('./MapComponent'), { ssr: false });
+// const MapSection = dynamic(() => import('./MapComponent'), { ssr: false });
 
 function PropertyCards() {
   const properties = [
